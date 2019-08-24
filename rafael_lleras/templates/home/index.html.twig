@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+	{% block up %}{{ parent() }}{% endblock %}
+	{% block content %}<h3>Creado por Rafael Lleras Díaz</h3>{% endblock %}
+	{% block down %}{{ parent() }}{% endblock %}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+	{% block up %}{{ parent() }}{% endblock %}
+		{% block content %}
+			<div class="example-wrapper">
+			    <h1>Resultados del filtro</h1>
+			</div>
+			{% if data|length > 0 %}
+			<br/>
+			<div class="bs-example widget-shadow tables" data-example-id="hoverable-table"> 
+					<table class="table table-hover"> 
+						<thead> 
+							<tr> 
+								<th>Código</th> 
+								<th>Nombre</th> 
+								<th>Descripción</th> 
+								<th>Marca</th>
+								<th>Precio</th>
+								<th>Categoría</th>
+								<th></th>
+								<th></th> 
+							</tr> 
+						</thead> 
+						<tbody> 
+							{% for i in data %}
+							<tr> 
+								<td scope="row">{{ i.code }}</td> 
+								<td>{{ i.name }}</td> 
+								<td>{{ i.description }}</td> 
+								<td>{{ i.brand }}</td>
+								<td>{{ i.price }}</td>
+								<td>{{ i.category_name }}</td>
+								<td>
+									<a href="{{ path('update_product', {'id':i.id}) }}">
+				                		<i class="glyphicon glyphicon-edit"></i> 
+				                		<span>Editar</span>
+				                	</a>
+				                </td>
+				                <td>
+									<a href="#" onclick="confirm_delete_product({{ i.id }});">
+				                		<i class="glyphicon glyphicon-remove"></i> 
+				                		<span>Eliminar</span>
+				                	</a>
+				                </td>
+							</tr>
+							{% endfor %}
+						</tbody> 
+					</table>
+				</div>
+			{% else %}
+				<br/>
+				<h3>No hay elementos para mostrar</h3>
+			{% endif %}
+
+		<br/>
+
+    	<script src="{{ asset('js/product.js') }}"></script>
+
+		{% endblock %}
+
+	{% block down %}{{ parent() }}{% endblock %}
+
+{% endblock %}

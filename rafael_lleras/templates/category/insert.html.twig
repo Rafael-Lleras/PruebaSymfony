@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+	
+	{% block up %}{{ parent() }}{% endblock %}
+		
+		{% block content %}
+    		
+    		<div class="example-wrapper">
+			    <h1>Insersión de categoría</h1>
+			</div>
+    		<div class="form-three widget-shadow">
+    			{{ form_start(category_form) }}
+				    {{ form_row(category_form.code, {'label': 'Código'}) }}<br/>
+					{{ form_row(category_form.name, {'label': 'Nombre'}) }}<br/>
+					{{ form_row(category_form.description, {'label': 'Descripción', 'attr':{'max_length':1048576 , 'rows':5 , 'cols':70}}) }}<br/>
+					<div class="form-group centered">
+        				<button type="submit" class="btn btn-primary centered">Insertar</button>
+        			</div>
+    			</div>
+
+    			{{ form_end(category_form) }}
+
+    		</div>
+
+		{% endblock %}
+
+	{% block down %}{{ parent() }}{% endblock %}
+	
+{% endblock %}

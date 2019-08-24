@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+	
+	{% block up %}{{ parent() }}{% endblock %}
+		
+		{% block content %}
+    		
+    		<div class="example-wrapper">
+			    <h1>Filtro de productos</h1>
+			</div>
+    		<div class="form-three widget-shadow">
+    			{{ form_start(product_form) }}
+				    {{ form_row(product_form.code, {'label': 'Código'}) }}<br/>
+					{{ form_row(product_form.name, {'label': 'Nombre'}) }}<br/>
+					{{ form_row(product_form.description, {'label': 'Descripción', 'attr':{'max_length':1048576 , 'rows':5 , 'cols':70}}) }}<br/>
+					{{ form_row(product_form.brand, {'label': 'Marca'}) }}<br/>
+					{{ form_row(product_form.price, {'label': 'Precio'}) }}<br/>
+					{{ form_row(product_form.category, {'label': 'Categoría'}) }}<br/>
+					<div class="form-group centered">
+        				<button type="submit" class="btn btn-primary centered">Filtrar</button>
+        			</div>
+    			</div>
+    			{{ form_end(product_form) }}
+
+    		</div>
+
+		{% endblock %}
+
+	{% block down %}{{ parent() }}{% endblock %}
+	
+{% endblock %}

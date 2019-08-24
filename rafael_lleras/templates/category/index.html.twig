@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+	{% block up %}{{ parent() }}{% endblock %}
+		{% block content %}
+			<div class="example-wrapper">
+			    <h1>Administración de categorías</h1>
+			</div>
+			{% if data|length > 0 %}
+			<br/>
+			<h4>
+				Ordenar por
+				<select id="select_order_category" onchange="order_category_by();">
+					<option value="code" {% if order_by == "code" %} selected {% endif %}>Código</option>
+					<option value="name" {% if order_by == "name" %} selected {% endif %}>Nombre</option>
+					<option value="description" {% if order_by == "description" %} selected {% endif %}>Descripción</option>
+					<option value="active" {% if order_by == "active" %} selected {% endif %}>Activa</option>
+				</select>
+			</h4>
+			<div class="bs-example widget-shadow tables" data-example-id="hoverable-table"> 
+					<table class="table table-hover"> 
+						<thead> 
+							<tr> 
+								<th>Código</th> 
+								<th>Nombre</th> 
+								<th>Descripción</th> 
+								<th>Activa</th>
+								<th></th>
+								<th></th> 
+							</tr> 
+						</thead> 
+						<tbody> 
+							{% for i in data %}
+							<tr> 
+								<td scope="row">{{ i.code }}</td> 
+								<td>{{ i.name }}</td> 
+								<td>{{ i.description }}</td> 
+								<td>
+									<input type="checkbox" id="active_check" {% if i.active == 1 %} checked {% endif %} onchange="change_state_of_category({{ i.id }});" />
+								</td>
+								<td>
+									<a href="{{ path('update_category', {'id':i.id}) }}">
+				                		<i class="glyphicon glyphicon-edit"></i> 
+				                		<span>Editar</span>
+				                	</a>
+				                </td> 
+							</tr>
+							{% endfor %}
+						</tbody> 
+					</table>
+				</div>
+			{% else %}
+				<br/>
+				<h3>No hay elementos para mostrar</h3>
+			{% endif %}
+
+		<br/>
+		<a href="{{ path('insert_category') }}">
+    		<i class="glyphicon glyphicon-plus-sign"></i> 
+    		<span>Nueva categoría</span>
+    	</a>
+
+    	<script src="{{ asset('js/category.js') }}"></script>
+
+		{% endblock %}
+
+	{% block down %}{{ parent() }}{% endblock %}
+
+{% endblock %}
